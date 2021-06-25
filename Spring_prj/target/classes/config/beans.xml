@@ -6,7 +6,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 <context:property-placeholder location="classpath:config/value.properties"/>
-
+<context:component-scan base-package="myspring.user"/>	
 	<bean id="hello" class="myspring.di.xml.Hello">
 		<constructor-arg index="0" value="${myname}"></constructor-arg>
 		<constructor-arg index="1" ref="${myprinter}"></constructor-arg>
@@ -18,7 +18,13 @@
 			</list>
 		</property>
 	</bean>
-
-	<bean id="printer" class="myspring.di.xml.StringPrinter"/>
-	<bean id="consolePrinter" class="myspring.di.xml.ConsolePrint"/>
+	
+		<!-- DataSource등록 -->
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="${db.driverClass}"></property>
+		<property name="url" value="${db.url}"></property>
+		<property name="username" value="${db.username}"></property>
+		<property name="password" value="${db.password}"></property>
+	</bean>
 </beans>
