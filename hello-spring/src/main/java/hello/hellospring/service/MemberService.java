@@ -23,7 +23,6 @@ public class MemberService {
         memeberRepository.save(member);
         return member.getId();
     }
-
     private void validateDuplicateMember(Member member) {
         memeberRepository.findName(member.getName())
              .ifPresent(m -> {
