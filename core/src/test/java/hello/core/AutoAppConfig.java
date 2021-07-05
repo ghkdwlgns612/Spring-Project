@@ -17,8 +17,8 @@ import org.springframework.context.annotation.FilterType;
 
 public class AutoAppConfig {
 
-    @Bean("memoryMemberRepository") //중복으로 등록되도 수동으로 하는 것이 우선적으로 실행해준다.Overridng해줌.
-    MemberRepository memberRepository() {
-        return new MemoryMemberRepository();
-    }
+//    @Bean("memoryMemberRepository") //중복으로 등록되도 수동으로 하는 것이 우선적으로 실행해준다.Overridng해줌.
+//    MemberRepository memberRepository() {
+//        return new MemoryMemberRepository();
+//    }
 }
