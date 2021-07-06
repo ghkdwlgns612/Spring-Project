@@ -56,6 +56,12 @@ public class User {
             throw new IllegalArgumentException("Bad credential");
         }
     }
+
+    public void afterLoginSuccess() {
+        loginCount++;
+        lastLoginAt = LocalDateTime.from(now());
+    }
+
     public Long getSeq() {
         return seq;
     }
