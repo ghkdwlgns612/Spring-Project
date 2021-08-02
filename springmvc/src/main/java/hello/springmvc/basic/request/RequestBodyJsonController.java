@@ -32,6 +32,7 @@ public class RequestBodyJsonController {
         log.info("username={},age={}",helloData.getUsername(),helloData.getAge());
         response.getWriter().write("ok");
     }
+
     @ResponseBody
     @PostMapping("/request-body-json-v2")
     public String requestBodyJsonV2(@RequestBody String messageBody) throws IOException {
@@ -40,12 +41,14 @@ public class RequestBodyJsonController {
         log.info("username={},age={}",helloData.getUsername(),helloData.getAge());
         return "ok";
     }
+
     @ResponseBody
     @PostMapping("/request-body-json-v3")
     public String requestBodyJsonV3(@RequestBody HelloData helloData)  {
         log.info("username={},age={}",helloData.getUsername(),helloData.getAge());
         return "ok";
     }
+
     @ResponseBody
     @PostMapping("/request-body-json-v4")
     public String requestBodyJsonV4(HttpEntity<HelloData> helloData)  {
