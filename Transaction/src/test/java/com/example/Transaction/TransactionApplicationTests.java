@@ -1,6 +1,5 @@
 package com.example.Transaction;
 
-import com.example.Transaction.domain.Member;
 import com.example.Transaction.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.logging.Logger;
@@ -19,22 +18,14 @@ import java.util.Optional;
 @SpringBootTest
 class TransactionApplicationTests {
 
-	Logger log = (Logger) LoggerFactory.getLogger(TransactionApplicationTests.class);
+
 
 	@Autowired
 	private DataSource dataSource;
 	@Autowired
 	private MemberRepository memberRepository;
 
-//	@Test
-//	void Test1() {
-//		System.out.println("data = " + dataSource);
-//	}
 
 
-	@Test
-	void findByIdTest() {
-		Optional<Member> byId = memberRepository.findById(1L);
-		System.out.println("byId = " + byId.get().getName());
-	}
+
 }
