@@ -1,15 +1,14 @@
-package jpabook.jpashop.domain;
+package jpabook.jpashop.domain_practice;
 
-import jpabook.jpashop.domain.item.Item;
+import jpabook.jpashop.domain_practice.item.Item;
 import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter @Setter
+@Getter
 public class Category {
     @Id
     @GeneratedValue
@@ -20,9 +19,10 @@ public class Category {
 
     @ManyToMany
     @JoinTable(name = "category_item",
-        joinColumns = @JoinColumn(name = "category_id"),
-        inverseJoinColumns = @JoinColumn(name = "item_id"))
+    joinColumns = @JoinColumn(name = "category_id"),
+    inverseJoinColumns = @JoinColumn(name = "item_id"))
     private List<Item> items = new ArrayList<>();
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
     private Category parent;
@@ -30,9 +30,8 @@ public class Category {
     @OneToMany(mappedBy = "parent")
     private List<Category> child = new ArrayList<>();
 
-    //==연관관계 편입메서드==//
-    public void addChildCategory(Category child) {
-        this.child.add(child);
-        child.setParent(this);
+    public void addChildCategory(Category category) {
+        this.child.add((Category) child);
+//        child.setParent(this);
     }
 }
