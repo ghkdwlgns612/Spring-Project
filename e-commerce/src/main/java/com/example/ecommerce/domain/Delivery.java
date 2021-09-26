@@ -1,12 +1,14 @@
 package com.example.ecommerce.domain;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@Setter
 public class Delivery {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,6 +1,7 @@
 package com.example.ecommerce.domain;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@Setter
 @Table(name = "orders")
 public class Order {
     @Id
@@ -38,11 +40,38 @@ public class Order {
 
     public void addOrderItem(OrderItem orderItem) {
         orderItems.add(orderItem);
-        //orderItem.setOrder(this);
+        orderItem.setOrder(this);
     }
 
     public void setDelivery(Delivery delivery) {
         this.delivery = delivery;
-        //delivery.setOrder(this);
+        delivery.setOrder(this);
+    }
+
+    public static Order createOrder(User user, Delivery delivery, OrderItem... orderItems){
+        Order order = new Order();
+        order.setUser(user);
+        order.setDelivery(delivery);
+        for (OrderItem orderItem : orderItems) {
+            order.addOrderItem(orderItem);
+        }
+        order.setStatus(OrderStatus.ORDER);
+        order.setOrderDate(LocalDateTime.now());
+        return order;
+    }
+
+    public void cancel() {
+        if (delivery.getStatus() == DeliveryStatus.COMP)
+            throw new IllegalStateException("이미 배송완료되어진 상품입니다.");
+        this.setStatus(OrderStatus.CANCEL);
+        for (OrderItem orderItem : orderItems) {
+            orderItem.cancel();
+        }
+    }
+
+    public int getTotalPrice() {
+        return orderItems.stream().
+                mapToInt(OrderItem::getTotalPrice)
+                .sum();
     }
 }
