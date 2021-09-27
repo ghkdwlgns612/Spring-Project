@@ -1,5 +1,6 @@
 package com.example.ecommerce.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ public class Category {
 
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "category",fetch = FetchType.LAZY)
     private List<CategoryItem> categoryItems = new ArrayList<>();
 

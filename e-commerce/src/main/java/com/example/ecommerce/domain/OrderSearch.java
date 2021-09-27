@@ -12,4 +12,8 @@ public class OrderSearch {
         this.userName = userName;
         this.status = status;
     }
+
+    public OrderSearch() {
+
+    }
 }

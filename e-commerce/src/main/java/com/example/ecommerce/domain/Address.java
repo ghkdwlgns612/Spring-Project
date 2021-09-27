@@ -2,6 +2,7 @@ package com.example.ecommerce.domain;
 
 import lombok.Getter;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Getter
@@ -9,6 +10,7 @@ import javax.persistence.Embeddable;
 public class Address {
     private String city;
     private String street;
+    @Column(nullable = true)
     private int zipcode;
 
     protected Address() {

@@ -36,4 +36,10 @@ public class UserService {
     public User findOne(Long id) {
         return userRepository.findOne(id);
     }
+
+    @Transactional
+    public void update(Long id, String name) {
+        User one = userRepository.findOne(id);
+        one.setName(name);
+    }
 }

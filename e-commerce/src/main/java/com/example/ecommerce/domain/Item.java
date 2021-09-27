@@ -1,5 +1,6 @@
 package com.example.ecommerce.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,9 +24,11 @@ public abstract class Item {
 
     private int stockQuantity;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "item",fetch = FetchType.LAZY)
     private List<OrderItem> orderItems = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "item",fetch = FetchType.LAZY)
     private List<CategoryItem> categoryItems = new ArrayList<>();
 

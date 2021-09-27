@@ -57,4 +57,32 @@ public class OrderRepository {
         }
         return query.getResultList();
     }
+
+    public List<Order> findAllWithUserDelivery() {
+        return em.createQuery(
+                        "select o from Order o" +
+                                " join fetch o.user u" +
+                                " join fetch o.delivery d", Order.class)
+                .getResultList();
+    }
+
+    public List<Order> findAllWithItem() {
+        return em.createQuery(
+                "select distinct o from Order o" +
+                " join fetch o.user u" +
+                " join fetch o.delivery d" +
+                " join fetch o.orderItems oi" +
+                " join fetch oi.item i",Order.class)
+                .getResultList();
+    }
+
+    public List<Order> findAllWithUserDelivery(int offset, int limit) {
+        return em.createQuery(
+                "select o from Order o" +
+                        " join fetch o.user u" +
+                        " join fetch o.delivery d",Order.class)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+    }
 }
